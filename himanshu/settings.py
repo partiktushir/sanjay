@@ -28,11 +28,15 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in {
 }
 
 ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
-    if host.strip()
+    "sanjay-fwz3.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://sanjay-fwz3.onrender.com",
+]
+DEBUG = False
 
 INSTALLED_APPS = [
     "adminlte3",
