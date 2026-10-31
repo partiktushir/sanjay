@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}
+Facilities | {{ school.school_name|default:"School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================================
+     PAGE HERO
+===================================================== -->
+
+<section class="facility-page-hero">
+
+    <div class="facility-page-hero-overlay"></div>
+
+    <div class="facility-page-hero-content">
+
+        <div class="facility-page-icon">
+            <i class="fa-solid fa-building-columns"></i>
+        </div>
+
+        <h1>Our Facilities</h1>
+
+        <p>
+            Modern facilities and a supportive environment
+            for the overall development of our students.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FACILITIES
+===================================================== -->
+
+<section class="facilities-main-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span>
+                <i class="fa-solid fa-star"></i>
+                School Facilities
+            </span>
+
+            <h2>Everything Students Need</h2>
+
+            <div class="heading-line"></div>
+
+            <p>
+                We provide quality facilities designed to support
+                learning, activities, sports and student development.
+            </p>
+
+        </div>
+
+
+        {% if facilities %}
+
+        <div class="facilities-main-grid">
+
+            {% for facility in facilities %}
+
+            <article class="facility-main-card">
+
+                <!-- IMAGE -->
+
+                <div class="facility-main-image">
+
+                    {% if facility.image %}
+
+                    <img
+                        src="{{ facility.image.url }}"
+                        alt="{{ facility.title }}"
+                        loading="lazy"
+                    >
+
+                    {% else %}
+
+                    <div class="facility-main-default-image">
+
+                        {% if facility.icon %}
+
+                        <i class="{{ facility.icon }}"></i>
+
+                        {% else %}
+
+                        <i class="fa-solid fa-school"></i>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class="facility-main-number">
+                        {{ forloop.counter|stringformat:"02d" }}
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="facility-main-content">
+
+                    <div class="facility-main-icon">
+
+                        {% if facility.icon %}
+
+                        <i class="{{ facility.icon }}"></i>
+
+                        {% else %}
+
+                        <i class="fa-solid fa-building"></i>
+
+                        {% endif %}
+
+                    </div>
+
+                    <h3>
+                        {{ facility.title }}
+                    </h3>
+
+                    {% if facility.description %}
+
+                    <p>
+                        {{ facility.description }}
+                    </p>
+
+                    {% else %}
+
+                    <p>
+                        Quality facilities designed to provide
+                        students with a better learning environment.
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+
+        <div class="facilities-main-empty">
+
+            <div class="facilities-empty-icon">
+                <i class="fa-solid fa-building-circle-xmark"></i>
+            </div>
+
+            <h3>No Facilities Available</h3>
+
+            <p>
+                School facilities will be added soon.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="facility-page-cta">
+
+    <div class="section-container">
+
+        <div class="facility-page-cta-box">
+
+            <div class="facility-page-cta-icon">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+            <div class="facility-page-cta-content">
+
+                <h2>
+                    Learn More About Our School
+                </h2>
+
+                <p>
+                    Explore our school, academics and student
+                    development programs.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'about' %}"
+                class="facility-page-cta-btn"
+            >
+                <i class="fa-solid fa-circle-info"></i>
+                About Our School
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}
+Academics | {{ school.school_name|default:"School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================================
+     ACADEMICS HERO
+===================================================== -->
+
+<section class="academics-page-hero">
+
+    <div class="academics-page-hero-content">
+
+        <div class="academics-page-icon">
+            <i class="fa-solid fa-book-open"></i>
+        </div>
+
+        <h1>Academics</h1>
+
+        <p>
+            Building strong foundations through quality education,
+            knowledge and continuous learning.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACADEMICS CONTENT
+===================================================== -->
+
+<section class="academics-main-section">
+
+    <div class="section-container">
+
+        <div class="section-heading academics-heading">
+
+            <span>
+                <i class="fa-solid fa-graduation-cap"></i>
+                Academic Excellence
+            </span>
+
+            <h2>Our Academic Programs</h2>
+
+            <div class="heading-line"></div>
+
+            <p>
+                We focus on quality education and the overall
+                academic development of every student.
+            </p>
+
+        </div>
+
+
+        {% if academics %}
+
+        <div class="academics-main-grid">
+
+            {% for academic in academics %}
+
+            <article class="academic-main-card">
+
+                <div class="academic-main-image">
+
+                    {% if academic.image %}
+
+                    <img
+                        src="{{ academic.image.url }}"
+                        alt="{{ academic.title }}"
+                        loading="lazy"
+                    >
+
+                    {% else %}
+
+                    <div class="academic-default-image">
+
+                        {% if academic.icon %}
+
+                        <i class="{{ academic.icon }}"></i>
+
+                        {% else %}
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="academic-main-content">
+
+                    <div class="academic-main-icon">
+
+                        {% if academic.icon %}
+
+                        <i class="{{ academic.icon }}"></i>
+
+                        {% else %}
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        {% endif %}
+
+                    </div>
+
+                    <h3>
+                        {{ academic.title }}
+                    </h3>
+
+                    {% if academic.description %}
+
+                    <p>
+                        {{ academic.description }}
+                    </p>
+
+                    {% else %}
+
+                    <p>
+                        Quality academic education designed to
+                        help students learn and grow.
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="academics-empty">
+
+            <div class="academics-empty-icon">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+
+            <h3>No Academic Information Available</h3>
+
+            <p>
+                Academic information will be added soon.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACADEMIC FEATURES
+===================================================== -->
+
+<section class="academic-features-section">
+
+    <div class="section-container">
+
+        <div class="academic-features-grid">
+
+            <div class="academic-feature-card">
+
+                <div class="academic-feature-icon">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+
+                <h3>Quality Teaching</h3>
+
+                <p>
+                    Experienced teachers help students develop
+                    strong academic foundations.
+                </p>
+
+            </div>
+
+
+            <div class="academic-feature-card">
+
+                <div class="academic-feature-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+
+                <h3>Practical Learning</h3>
+
+                <p>
+                    We encourage students to understand concepts
+                    through practical and engaging learning.
+                </p>
+
+            </div>
+
+
+            <div class="academic-feature-card">
+
+                <div class="academic-feature-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <h3>Student Progress</h3>
+
+                <p>
+                    Regular assessment helps us monitor and
+                    improve every student's progress.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="academics-cta">
+
+    <div class="section-container">
+
+        <div class="academics-cta-box">
+
+            <div class="academics-cta-icon">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+            <div class="academics-cta-content">
+
+                <h2>
+                    Explore Our School
+                </h2>
+
+                <p>
+                    Learn more about our facilities and
+                    educational environment.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'facilities' %}"
+                class="academics-cta-btn"
+            >
+                <i class="fa-solid fa-building"></i>
+                View Facilities
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

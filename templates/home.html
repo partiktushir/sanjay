@@ -1,0 +1,693 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | {{ school.school_name|default:"Lakhi Ram Memorial Public Sec. School" }}
+{% endblock %}
+
+{% block content %}
+<div style="
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url('/static/images/background.jpg') center / cover no-repeat;
+"></div>
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero-section">
+
+    {% if school and school.hero_video %}
+        <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            <source
+                src="{{ school.hero_video.url }}"
+                type="video/mp4"
+            >
+            Your browser does not support the video tag.
+        </video>
+    {% else %}
+        <div class="hero-fallback"></div>
+    {% endif %}
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-icon">
+            <i class="fa-solid fa-school"></i>
+        </div>
+
+        <p class="hero-small-title">
+            WELCOME TO
+        </p>
+
+        <h1>
+            {{ school.school_name|default:"Lakhi Ram Memorial Public Sec. School" }}
+        </h1>
+
+        <p class="hero-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Halalpur, Sonipat
+        </p>
+
+        {% if school.admission_open %}
+            <div class="admission-status admission-open">
+                <i class="fa-solid fa-circle-check"></i>
+                Admissions Open
+            </div>
+        {% else %}
+            <div class="admission-status admission-closed">
+                <i class="fa-solid fa-circle-xmark"></i>
+                Admissions Closed
+            </div>
+        {% endif %}
+
+        {% if school.admission_button_show %}
+            <a
+                href="{% url 'admission' %}"
+                class="hero-admission-btn"
+            >
+                <i class="fa-solid fa-file-pen"></i>
+                Apply for Admission
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        {% endif %}
+
+    </div>
+
+    <div class="hero-scroll">
+        <span>Scroll Down</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRINCIPAL SECTION
+========================================================= -->
+
+<section class="principal-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span>
+                <i class="fa-solid fa-user-tie"></i>
+                School Leadership
+            </span>
+
+            <h2>
+                Message From Our Principal
+            </h2>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+        {% if principal %}
+
+        <div class="principal-card">
+
+            <div class="principal-image-wrapper">
+
+                {% if principal.photo %}
+                    <img
+                        src="{{ principal.photo.url }}"
+                        alt="{{ principal.name }}"
+                        class="principal-image"
+                    >
+                {% else %}
+                    <div class="principal-placeholder">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="principal-content">
+
+                <div class="quote-icon">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+
+                <p class="principal-thoughts">
+                    {{ principal.thoughts|default:"Welcome to our school. We are committed to providing quality education and building a bright future for every student." }}
+                </p>
+
+                <div class="principal-info">
+
+                    <h3>
+                        {{ principal.name }}
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        {{ principal.designation|default:"Principal" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-content">
+
+            <i class="fa-solid fa-user-tie"></i>
+
+            <h3>
+                Principal Information
+            </h3>
+
+            <p>
+                Principal information will be updated soon.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHATSAPP ENQUIRY SECTION
+========================================================= -->
+
+<section class="home-enquiry-section">
+
+    <div class="container">
+
+        <div class="home-enquiry-box">
+
+            <div class="home-enquiry-content">
+
+                <span class="home-section-label">
+                    <i class="fa-solid fa-headset"></i>
+                    HAVE A QUESTION?
+                </span>
+
+                <h2>
+                    Enquiry About Our School
+                </h2>
+
+                <p>
+                    For admission enquiries, school information,
+                    facilities and other details, contact us directly
+                    on WhatsApp.
+                </p>
+
+            </div>
+
+            {% if school.whatsapp_number %}
+
+            <div class="home-enquiry-action">
+
+                <a
+                    href="https://wa.me/{{ school.whatsapp_number|cut:' '|cut:'+'|cut:'-' }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="home-whatsapp-btn"
+                >
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    <span>
+                        Enquire on WhatsApp
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SOCIAL MEDIA SECTION
+========================================================= -->
+
+<section class="home-social-section">
+
+    <div class="container">
+
+        <div class="home-social-heading">
+
+            <span class="home-section-label">
+
+                <i class="fa-solid fa-share-nodes"></i>
+
+                CONNECT WITH US
+
+            </span>
+
+            <h2>
+                Follow Our School
+            </h2>
+
+            <p>
+                Stay connected with our latest school activities,
+                events and updates.
+            </p>
+
+        </div>
+
+        <div class="home-social-grid">
+
+            <!-- FACEBOOK -->
+
+            {% if school.facebook_url %}
+
+            <a
+                href="{{ school.facebook_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-social-card facebook"
+            >
+
+                <div class="home-social-icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Facebook
+                    </h3>
+
+                    <span>
+                        Follow us on Facebook
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-up-right-from-square home-social-arrow"></i>
+
+            </a>
+
+            {% endif %}
+
+
+            <!-- INSTAGRAM -->
+
+            {% if school.instagram_url %}
+
+            <a
+                href="{{ school.instagram_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-social-card instagram"
+            >
+
+                <div class="home-social-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Instagram
+                    </h3>
+
+                    <span>
+                        Follow us on Instagram
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-up-right-from-square home-social-arrow"></i>
+
+            </a>
+
+            {% endif %}
+
+
+            <!-- YOUTUBE -->
+
+            {% if school.youtube_url %}
+
+            <a
+                href="{{ school.youtube_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-social-card youtube"
+            >
+
+                <div class="home-social-icon">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        YouTube
+                    </h3>
+
+                    <span>
+                        Watch our school videos
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-up-right-from-square home-social-arrow"></i>
+
+            </a>
+
+            {% endif %}
+
+
+            <!-- WHATSAPP -->
+
+            {% if school.whatsapp_number %}
+
+            <a
+                href="https://wa.me/{{ school.whatsapp_number|cut:' '|cut:'+'|cut:'-' }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-social-card whatsapp"
+            >
+
+                <div class="home-social-icon">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        WhatsApp
+                    </h3>
+
+                    <span>
+                        Contact us on WhatsApp
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-up-right-from-square home-social-arrow"></i>
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SCHOOL LOCATION SECTION
+========================================================= -->
+
+<section class="home-location-section">
+
+    <div class="container">
+
+        <div class="home-location-heading">
+
+            <span class="home-section-label">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                FIND OUR SCHOOL
+
+            </span>
+
+            <h2>
+                School Location
+            </h2>
+
+            <p>
+                <i class="fa-solid fa-map-marker-alt"></i>
+                Visit Lakhi Ram Memorial Public Sec. School
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             GOOGLE MAP
+        ================================================== -->
+
+        <div class="home-map-wrapper">
+
+            <iframe
+                {% if location_embed_url %}
+                src="{{ location_embed_url }}"
+                {% else %}
+                src="https://www.google.com/maps?q=Lakhi%20Ram%20Memorial%20Public%20Sec.%20School%2C%20Halalpur%2C%20Sonipat%2C%20Haryana&output=embed"
+                {% endif %}
+                width="100%"
+                height="450"
+                style="border:0; width:100%; min-height:450px;"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lakhi Ram Memorial Public Sec. School Location">
+            </iframe>
+
+        </div>
+
+
+        <!-- =================================================
+             GOOGLE MAPS BUTTON
+        ================================================== -->
+
+        {% if school and school.location_url %}
+
+        <div class="home-location-button-wrapper">
+
+            <a
+                href="{{ school.location_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-location-btn"
+            >
+
+                <i class="fa-solid fa-location-arrow"></i>
+
+                <span>
+                    Open Location in Google Maps
+                </span>
+
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOME PHOTOS
+========================================================= -->
+
+{% if home_photos %}
+
+<section class="home-gallery-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span>
+                <i class="fa-solid fa-images"></i>
+                School Life
+            </span>
+
+            <h2>
+                Our School
+            </h2>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+        <div class="home-photo-grid">
+
+            {% for photo in home_photos %}
+
+            <div class="home-photo-card">
+
+                {% if photo.image %}
+
+                <img
+                    src="{{ photo.image.url }}"
+                    alt="{{ photo.title|default:'School Photo' }}"
+                    loading="lazy"
+                >
+
+                {% endif %}
+
+                <div class="home-photo-overlay">
+
+                    {% if photo.title %}
+
+                    <h3>
+                        {{ photo.title }}
+                    </h3>
+
+                    {% endif %}
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- VIEW FULL GALLERY -->
+
+        <div class="view-gallery-wrapper">
+
+            <a
+                href="{% url 'gallery' %}"
+                class="view-gallery-btn"
+            >
+
+                <i class="fa-solid fa-images"></i>
+
+                View Full Gallery
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =========================================================
+     QUICK FEATURES
+========================================================= -->
+
+<section class="quick-features">
+
+    <div class="section-container">
+
+        <div class="feature-grid">
+
+
+            <!-- QUALITY EDUCATION -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <h3>
+                    Quality Education
+                </h3>
+
+                <p>
+                    Focused learning with quality education
+                    and academic development.
+                </p>
+
+            </div>
+
+
+            <!-- SMART CLASSES -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+
+                <h3>
+                    Smart Classes
+                </h3>
+
+                <p>
+                    Modern classrooms designed to make learning
+                    interactive and effective.
+                </p>
+
+            </div>
+
+
+            <!-- SPORTS -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-futbol"></i>
+                </div>
+
+                <h3>
+                    Sports & Activities
+                </h3>
+
+                <p>
+                    Encouraging students to develop confidence
+                    through sports and activities.
+                </p>
+
+            </div>
+
+
+            <!-- STUDENT DEVELOPMENT -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <h3>
+                    Student Development
+                </h3>
+
+                <p>
+                    Supporting students in academic, social
+                    and personal development.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

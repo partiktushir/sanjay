@@ -1,0 +1,471 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admission | {{ school.school_name|default:"Lakhi Ram Memorial Public Sec. School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
+<section class="page-hero admission-page-hero">
+
+    <div class="page-hero-content">
+
+        <div class="page-hero-icon">
+            <i class="fa-solid fa-file-signature"></i>
+        </div>
+
+        <h1>Admission</h1>
+
+        <p>
+            Apply for admission and take the first step
+            towards a bright future.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMISSION SECTION
+========================================================= -->
+
+<section class="admission-section">
+
+    <div class="section-container">
+
+        <div class="admission-layout">
+
+            <!-- =================================================
+                 LEFT INFORMATION
+            ================================================== -->
+
+            <div class="admission-info">
+
+                <span class="admission-small-title">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Admissions Open
+                </span>
+
+                <h2>
+                    Start Your Child's
+                    Educational Journey
+                </h2>
+
+                <div class="admission-heading-line"></div>
+
+                <p>
+                    Fill out the admission form with the required
+                    information. Our school team will contact you
+                    after receiving your application.
+                </p>
+
+
+                <!-- Information Cards -->
+
+                <div class="admission-info-list">
+
+                    <div class="admission-info-item">
+
+                        <div class="admission-info-icon">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+
+                        <div>
+                            <h3>Easy Application</h3>
+
+                            <p>
+                                Submit your admission application
+                                online in a few simple steps.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="admission-info-item">
+
+                        <div class="admission-info-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+
+                        <div>
+                            <h3>Quick Contact</h3>
+
+                            <p>
+                                Our school team will contact you
+                                regarding your application.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="admission-info-item">
+
+                        <div class="admission-info-icon">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+
+                        <div>
+                            <h3>Quality Education</h3>
+
+                            <p>
+                                Join a supportive environment focused
+                                on education and student development.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADMISSION FORM
+            ================================================== -->
+
+            <div class="admission-form-card">
+
+                <div class="admission-form-header">
+
+                    <div class="admission-form-header-icon">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    <div>
+                        <h2>Admission Application</h2>
+
+                        <p>
+                            Please fill in all required information.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Errors -->
+
+                {% if form.non_field_errors %}
+
+                <div class="admission-error">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    {{ form.non_field_errors }}
+
+                </div>
+
+                {% endif %}
+
+
+                <form
+                    method="POST"
+                    class="admission-form"
+                    novalidate
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- Student Information -->
+
+                    <div class="admission-form-section-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Student Information
+
+                    </div>
+
+
+                    <div class="admission-form-grid">
+
+                        <!-- Student Name -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.student_name.id_for_label }}">
+                                Student Name
+                                <span>*</span>
+                            </label>
+
+                            {{ form.student_name }}
+
+                            {% for error in form.student_name.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Date of Birth -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.date_of_birth.id_for_label }}">
+                                Date of Birth
+                                <span>*</span>
+                            </label>
+
+                            {{ form.date_of_birth }}
+
+                            {% for error in form.date_of_birth.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Gender -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.gender.id_for_label }}">
+                                Gender
+                                <span>*</span>
+                            </label>
+
+                            {{ form.gender }}
+
+                            {% for error in form.gender.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Applying Class -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.applying_class.id_for_label }}">
+                                Applying Class
+                                <span>*</span>
+                            </label>
+
+                            {{ form.applying_class }}
+
+                            {% for error in form.applying_class.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Parent Information -->
+
+                    <div class="admission-form-section-title">
+
+                        <i class="fa-solid fa-people-roof"></i>
+
+                        Parent Information
+
+                    </div>
+
+
+                    <div class="admission-form-grid">
+
+                        <!-- Father -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.father_name.id_for_label }}">
+                                Father's Name
+                                <span>*</span>
+                            </label>
+
+                            {{ form.father_name }}
+
+                            {% for error in form.father_name.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Mother -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.mother_name.id_for_label }}">
+                                Mother's Name
+                                <span>*</span>
+                            </label>
+
+                            {{ form.mother_name }}
+
+                            {% for error in form.mother_name.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Contact Information -->
+
+                    <div class="admission-form-section-title">
+
+                        <i class="fa-solid fa-address-book"></i>
+
+                        Contact Information
+
+                    </div>
+
+
+                    <div class="admission-form-grid">
+
+                        <!-- Mobile -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.mobile.id_for_label }}">
+                                Mobile Number
+                                <span>*</span>
+                            </label>
+
+                            {{ form.mobile }}
+
+                            {% for error in form.mobile.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="admission-field">
+
+                            <label for="{{ form.email.id_for_label }}">
+                                Email Address
+                            </label>
+
+                            {{ form.email }}
+
+                            {% for error in form.email.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Address -->
+
+                    <div class="admission-field">
+
+                        <label for="{{ form.address.id_for_label }}">
+                            Complete Address
+                            <span>*</span>
+                        </label>
+
+                        {{ form.address }}
+
+                        {% for error in form.address.errors %}
+                            <small class="field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- Previous School -->
+
+                    <div class="admission-field">
+
+                        <label for="{{ form.previous_school.id_for_label }}">
+                            Previous School
+                        </label>
+
+                        {{ form.previous_school }}
+
+                        {% for error in form.previous_school.errors %}
+                            <small class="field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div class="admission-field">
+
+                        <label for="{{ form.message.id_for_label }}">
+                            Additional Information
+                        </label>
+
+                        {{ form.message }}
+
+                        {% for error in form.message.errors %}
+                            <small class="field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="admission-submit-btn"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Submit Admission Application
+
+                    </button>
+
+                    <p class="admission-form-note">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your information will be securely
+                        submitted to the school administration.
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}
+Results | {{ school.school_name|default:"Lakhi Ram Memorial Public Sec. School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     RESULT PAGE HERO
+========================================================= -->
+<section class="page-hero result-page-hero">
+    <div class="page-hero-content">
+
+        <div class="page-hero-icon">
+            <i class="fa-solid fa-award"></i>
+        </div>
+
+        <h1>School Results</h1>
+
+        <p>
+            Celebrating the achievements and academic excellence
+            of our students.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- =========================================================
+     RESULTS SECTION
+========================================================= -->
+<section class="result-section">
+
+    <div class="section-container">
+
+        <!-- Heading -->
+        <div class="section-heading">
+
+            <span>
+                <i class="fa-solid fa-chart-line"></i>
+                Academic Excellence
+            </span>
+
+            <h2>Our Students' Results</h2>
+
+            <div class="heading-line"></div>
+
+            <p class="result-heading-text">
+                We are proud of our students for their dedication,
+                hard work and outstanding academic performance.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             RESULT CARDS
+        ================================================== -->
+        {% if results %}
+
+        <div class="result-grid">
+
+            {% for item in results %}
+
+            <div class="result-card">
+
+                <!-- Student Image -->
+                <div class="result-student-image">
+
+                    {% if item.student_photo %}
+
+                    <img
+                        src="{{ item.student_photo.url }}"
+                        alt="{{ item.student_name }}"
+                        loading="lazy"
+                    >
+
+                    {% else %}
+
+                    <div class="result-default-photo">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Student Information -->
+                <div class="result-card-content">
+
+                    <div class="result-class-badge">
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        Class {{ item.student_class }}
+                    </div>
+
+
+                    <h3>
+                        {{ item.student_name }}
+                    </h3>
+
+
+                    <!-- Percentage -->
+                    <div class="result-percentage">
+
+                        <span class="result-percentage-label">
+                            Percentage
+                        </span>
+
+                        <strong>
+                            {{ item.percentage }}%
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Result Details -->
+                    <div class="result-details">
+
+                        <div class="result-detail-item">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <div>
+                                <span>Year</span>
+                                <strong>{{ item.year }}</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="result-detail-item">
+
+                            <i class="fa-solid fa-ranking-star"></i>
+
+                            <div>
+                                <span>Rank</span>
+                                <strong>
+                                    {% if item.rank %}
+                                        {{ item.rank }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Achievement -->
+                    <div class="result-achievement">
+
+                        <i class="fa-solid fa-medal"></i>
+
+                        <span>
+                            Academic Achievement
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <!-- No Results -->
+        <div class="result-empty">
+
+            <div class="result-empty-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <h3>No Results Available</h3>
+
+            <p>
+                Student results will be published here soon.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ACHIEVEMENT CTA
+========================================================= -->
+<section class="result-cta">
+
+    <div class="section-container">
+
+        <div class="result-cta-content">
+
+            <div class="result-cta-icon">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+
+            <div class="result-cta-text">
+
+                <h2>
+                    Building Bright Futures
+                </h2>
+
+                <p>
+                    Our school is committed to providing quality
+                    education and helping every student achieve
+                    their goals.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'about' %}"
+                class="result-cta-btn"
+            >
+                <i class="fa-solid fa-circle-info"></i>
+
+                About Our School
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

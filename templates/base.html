@@ -1,0 +1,707 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            Lakhi Ram School
+        {% endblock %}
+    </title>
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         MAIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOP SOCIAL BAR
+========================================================= -->
+
+<div class="top-bar">
+
+    <div class="container top-bar-container">
+
+
+        <!-- =================================================
+             SOCIAL LINKS
+        ================================================== -->
+
+        <div class="social-links">
+
+            <a
+                href="{{ school.facebook_url|default:'#' }}"
+                target="_blank"
+                aria-label="Facebook"
+            >
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+
+            <a
+                href="{{ school.instagram_url|default:'#' }}"
+                target="_blank"
+                aria-label="Instagram"
+            >
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+
+            <a
+                href="{{ school.youtube_url|default:'#' }}"
+                target="_blank"
+                aria-label="YouTube"
+            >
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+        ================================================== -->
+
+        <div class="top-contact">
+
+
+            {% if school.phone %}
+
+            <a href="tel:{{ school.phone }}">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <span>
+                    {{ school.phone }}
+                </span>
+
+            </a>
+
+            {% endif %}
+
+
+            {% if school.email %}
+
+            <a href="mailto:{{ school.email }}">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <span>
+                    {{ school.email }}
+                </span>
+
+            </a>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN NAVBAR
+========================================================= -->
+
+<header class="main-header">
+
+    <div class="container navbar-container">
+
+
+        <!-- =================================================
+             SCHOOL LOGO
+        ================================================== -->
+
+        <a
+            href="{% url 'home' %}"
+            class="school-logo"
+        >
+
+            {% if school.logo %}
+
+                <img
+                    src="{{ school.logo.url }}"
+                    alt="{{ school.school_name }}"
+                >
+
+            {% else %}
+
+                <div class="default-logo">
+
+                    <i class="fa-solid fa-school"></i>
+
+                </div>
+
+            {% endif %}
+
+        </a>
+
+
+
+        <!-- =================================================
+             MOBILE MENU BUTTON
+        ================================================== -->
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            type="button"
+            aria-label="Open menu"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <nav
+            class="main-nav"
+            id="mainNav"
+        >
+
+
+            <!-- HOME -->
+
+            <a
+                href="{% url 'home' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Home
+                </span>
+
+            </a>
+
+
+
+            <!-- FACILITIES -->
+
+            <a
+                href="{% url 'facilities' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-building"></i>
+
+                <span>
+                    Facilities
+                </span>
+
+            </a>
+
+
+
+            <!-- ACADEMICS -->
+
+            <a
+                href="{% url 'academics' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <span>
+                    Academics
+                </span>
+
+            </a>
+
+
+
+            <!-- SPORTS -->
+
+            <a
+                href="{% url 'sports' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <span>
+                    Sports
+                </span>
+
+            </a>
+
+
+
+            <!-- GALLERY -->
+
+            <a
+                href="{% url 'gallery' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-images"></i>
+
+                <span>
+                    Gallery
+                </span>
+
+            </a>
+
+
+
+            <!-- RESULT -->
+
+            <a
+                href="{% url 'result' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-award"></i>
+
+                <span>
+                    Result
+                </span>
+
+            </a>
+
+
+
+            <!-- ABOUT -->
+
+            <a
+                href="{% url 'about' %}"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-school"></i>
+
+                <span>
+                    About
+                </span>
+
+            </a>
+
+
+
+            <!-- ADMISSION -->
+
+            {% if school.admission_open %}
+
+                <a
+                    href="{% url 'admission' %}"
+                    class="admission-btn"
+                >
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <span>
+                        Admission
+                    </span>
+
+                </a>
+
+            {% endif %}
+
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     MARQUEE / NOTICE BAR
+========================================================= -->
+
+<div class="notice-bar">
+
+    <div class="notice-inner">
+
+
+        <!-- NOTICE LABEL -->
+
+        <div class="notice-label">
+
+            <i class="fa-solid fa-bullhorn"></i>
+
+            <span>
+                Notice
+            </span>
+
+        </div>
+
+
+        <!-- NOTICE TEXT -->
+
+        <div class="notice-scroll">
+
+            <div class="notice-text">
+
+                {{ school.marquee_text }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     PAGE CONTENT
+========================================================= -->
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="main-footer">
+
+    <div class="container footer-container">
+
+
+        <!-- =================================================
+             FOOTER LINKS
+        ================================================== -->
+
+        <div class="footer-links">
+
+
+            <!-- HOME -->
+
+            <a href="{% url 'home' %}">
+
+                <i class="fa-solid fa-house"></i>
+
+                Home
+
+            </a>
+
+
+
+            <!-- FACILITIES -->
+
+            <a href="{% url 'facilities' %}">
+
+                <i class="fa-solid fa-building"></i>
+
+                Facilities
+
+            </a>
+
+
+
+            <!-- ACADEMICS -->
+
+            <a href="{% url 'academics' %}">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                Academics
+
+            </a>
+
+
+
+            <!-- SPORTS -->
+
+            <a href="{% url 'sports' %}">
+
+                <i class="fa-solid fa-trophy"></i>
+
+                Sports
+
+            </a>
+
+
+
+            <!-- GALLERY -->
+
+            <a href="{% url 'gallery' %}">
+
+                <i class="fa-solid fa-images"></i>
+
+                Gallery
+
+            </a>
+
+
+
+            <!-- RESULT -->
+
+            <a href="{% url 'result' %}">
+
+                <i class="fa-solid fa-award"></i>
+
+                Result
+
+            </a>
+
+
+
+            <!-- ABOUT -->
+
+            <a href="{% url 'about' %}">
+
+                <i class="fa-solid fa-school"></i>
+
+                About
+
+            </a>
+
+
+
+            <!-- ADMISSION -->
+
+            {% if school.admission_open %}
+
+                <a href="{% url 'admission' %}">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Admission
+
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER SOCIAL
+        ================================================== -->
+
+        <div class="footer-social">
+
+
+            {% if school.facebook_url %}
+
+            <a
+                href="{{ school.facebook_url }}"
+                target="_blank"
+                aria-label="Facebook"
+            >
+
+                <i class="fa-brands fa-facebook-f"></i>
+
+            </a>
+
+            {% endif %}
+
+
+
+            {% if school.instagram_url %}
+
+            <a
+                href="{{ school.instagram_url }}"
+                target="_blank"
+                aria-label="Instagram"
+            >
+
+                <i class="fa-brands fa-instagram"></i>
+
+            </a>
+
+            {% endif %}
+
+
+
+            {% if school.youtube_url %}
+
+            <a
+                href="{{ school.youtube_url }}"
+                target="_blank"
+                aria-label="YouTube"
+            >
+
+                <i class="fa-brands fa-youtube"></i>
+
+            </a>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             COPYRIGHT
+        ================================================== -->
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © {% now "Y" %}
+
+                {{ school.school_name }}
+
+                . All Rights Reserved.
+
+            </p>
+
+
+            <p>
+
+                Made by
+
+                <strong>
+                    {{ school.made_by }}
+                </strong>
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     MOBILE MENU JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    const mobileMenuBtn =
+        document.getElementById("mobileMenuBtn");
+
+    const mainNav =
+        document.getElementById("mainNav");
+
+
+    if (mobileMenuBtn && mainNav) {
+
+        mobileMenuBtn.addEventListener(
+            "click",
+            function () {
+
+                mainNav.classList.toggle("active");
+
+            }
+        );
+
+    }
+
+
+    /*
+       Close mobile menu after clicking a navigation link
+    */
+
+    const navLinks =
+        document.querySelectorAll(
+            ".main-nav a"
+        );
+
+
+    navLinks.forEach(function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                if (mainNav) {
+
+                    mainNav.classList.remove("active");
+
+                }
+
+            }
+        );
+
+    });
+
+</script>
+
+
+
+{% block extra_js %}
+
+{% endblock %}
+
+
+</body>
+
+</html>

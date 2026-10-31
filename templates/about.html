@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+
+{% block title %}
+About Us | {{ school.school_name|default:"Lakhi Ram Memorial Public Sec. School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+<section class="page-hero about-page-hero">
+
+    <div class="page-hero-content">
+
+        <div class="page-hero-icon">
+            <i class="fa-solid fa-school"></i>
+        </div>
+
+        <h1>About Our School</h1>
+
+        <p>
+            Learn more about our school, facilities and
+            educational environment.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT SCHOOL
+========================================================= -->
+<section class="about-school-section">
+
+    <div class="section-container">
+
+        {% if about_school %}
+
+        <div class="about-school-grid">
+
+            <!-- Image -->
+            <div class="about-school-image">
+
+                {% if about_school.image %}
+
+                <img
+                    src="{{ about_school.image.url }}"
+                    alt="{{ about_school.title }}"
+                    loading="lazy"
+                >
+
+                {% else %}
+
+                <div class="about-default-image">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+
+                {% endif %}
+
+                <div class="about-image-badge">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Quality Education
+                </div>
+
+            </div>
+
+
+            <!-- Content -->
+            <div class="about-school-content">
+
+                <span class="about-small-title">
+                    <i class="fa-solid fa-circle-info"></i>
+                    About Our School
+                </span>
+
+                <h2>
+                    {{ about_school.title }}
+                </h2>
+
+                <div class="about-heading-line"></div>
+
+                <div class="about-description">
+                    {{ about_school.content|linebreaks }}
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="about-empty">
+
+            <div class="about-empty-icon">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+            <h3>School Information Coming Soon</h3>
+
+            <p>
+                Information about our school will be
+                added here soon.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SCHOOL FACILITIES
+========================================================= -->
+<section class="facilities-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span>
+                <i class="fa-solid fa-building"></i>
+                Our Facilities
+            </span>
+
+            <h2>Facilities & Services</h2>
+
+            <div class="heading-line"></div>
+
+            <p class="facilities-heading-text">
+                We provide a supportive and modern environment
+                to help students learn, grow and succeed.
+            </p>
+
+        </div>
+
+
+        {% if facilities %}
+
+        <div class="facilities-grid">
+
+            {% for facility in facilities %}
+
+            <div class="facility-card">
+
+                <!-- Facility Image -->
+                <div class="facility-image">
+
+                    {% if facility.image %}
+
+                    <img
+                        src="{{ facility.image.url }}"
+                        alt="{{ facility.title }}"
+                        loading="lazy"
+                    >
+
+                    {% else %}
+
+                    <div class="facility-default-image">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Facility Content -->
+                <div class="facility-content">
+
+                    <div class="facility-icon">
+
+                        {% if facility.icon %}
+
+                        <i class="{{ facility.icon }}"></i>
+
+                        {% else %}
+
+                        <i class="fa-solid fa-star"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <h3>
+                        {{ facility.title }}
+                    </h3>
+
+
+                    {% if facility.description %}
+
+                    <p>
+                        {{ facility.description }}
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="facilities-empty">
+
+            <div class="facilities-empty-icon">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <h3>Facilities Coming Soon</h3>
+
+            <p>
+                Our school facilities will be displayed here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY CHOOSE US
+========================================================= -->
+<section class="about-features-section">
+
+    <div class="section-container">
+
+        <div class="about-features-grid">
+
+            <div class="about-feature-card">
+
+                <div class="about-feature-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <h3>Quality Education</h3>
+
+                <p>
+                    Focused learning and academic development
+                    for every student.
+                </p>
+
+            </div>
+
+
+            <div class="about-feature-card">
+
+                <div class="about-feature-icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+
+                <h3>Student Development</h3>
+
+                <p>
+                    We encourage students to develop confidence,
+                    discipline and leadership.
+                </p>
+
+            </div>
+
+
+            <div class="about-feature-card">
+
+                <div class="about-feature-icon">
+                    <i class="fa-solid fa-futbol"></i>
+                </div>
+
+                <h3>Activities & Sports</h3>
+
+                <p>
+                    Opportunities for students to participate
+                    in sports and co-curricular activities.
+                </p>
+
+            </div>
+
+
+            <div class="about-feature-card">
+
+                <div class="about-feature-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <h3>Safe Environment</h3>
+
+                <p>
+                    A positive and supportive environment
+                    for students to learn and grow.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMISSION CTA
+========================================================= -->
+<section class="about-cta">
+
+    <div class="section-container">
+
+        <div class="about-cta-content">
+
+            <div class="about-cta-icon">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+
+            <div class="about-cta-text">
+
+                <h2>
+                    Want to become part of our school?
+                </h2>
+
+                <p>
+                    Apply for admission and give your child
+                    an opportunity to learn and grow with us.
+                </p>
+
+            </div>
+
+
+            {% if school and school.admission_button_show %}
+
+            <a
+                href="{% url 'admission' %}"
+                class="about-cta-btn"
+            >
+                <i class="fa-solid fa-file-signature"></i>
+                Apply for Admission
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

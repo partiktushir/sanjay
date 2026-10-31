@@ -1,0 +1,607 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sports | {{ school.name|default:"School" }}
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     SPORTS HERO
+========================================================= -->
+
+<section class="sports-page-hero">
+
+    <div class="sports-page-hero-overlay"></div>
+
+    <div class="sports-page-hero-content">
+
+        <div class="sports-page-icon">
+            <i class="fas fa-trophy"></i>
+        </div>
+
+        <span class="sports-page-small-title">
+            SPORTS & ACTIVITIES
+        </span>
+
+        <h1>
+            Sports at Our School
+        </h1>
+
+        <p>
+            Developing teamwork, discipline, confidence and a healthy lifestyle
+            through sports and physical activities.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPORTS SECTION
+========================================================= -->
+
+<section class="sports-main-section">
+
+    <div class="container">
+
+        <div class="section-heading sports-heading">
+
+            <span class="section-label">
+                <i class="fas fa-running"></i>
+                Our Sports
+            </span>
+
+            <h2>
+                Explore Our Sports Activities
+            </h2>
+
+            <p>
+                Discover different sports, activities, photos and videos
+                managed by our school.
+            </p>
+
+        </div>
+
+
+        {% if sports_list %}
+
+            <div class="sports-list">
+
+                {% for sport in sports_list %}
+
+                <article class="sport-main-card">
+
+                    <!-- SPORT HEADER -->
+
+                    <div class="sport-card-header">
+
+                        <div class="sport-card-icon">
+
+                            {% if sport.icon %}
+                                <i class="{{ sport.icon }}"></i>
+                            {% else %}
+                                <i class="fas fa-trophy"></i>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="sport-card-title">
+
+                            <span>
+                                Sport {{ forloop.counter }}
+                            </span>
+
+                            <h3>
+                                {{ sport.name }}
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SPORT DESCRIPTION -->
+
+                    {% if sport.description %}
+
+                    <div class="sport-description">
+
+                        <p>
+                            {{ sport.description }}
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- SPORT MAIN IMAGE -->
+
+                    {% if sport.image %}
+
+                    <div class="sport-main-feature-image">
+
+                        <img
+                            src="{{ sport.image.url }}"
+                            alt="{{ sport.name }}"
+                        >
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         SPORT PHOTOS
+                    ================================================== -->
+
+                    {% if sport.photos.all %}
+
+                    <div class="sport-media-section">
+
+                        <div class="sport-media-heading">
+
+                            <div>
+
+                                <span>
+                                    <i class="fas fa-images"></i>
+                                    Gallery
+                                </span>
+
+                                <h4>
+                                    {{ sport.name }} Photos
+                                </h4>
+
+                            </div>
+
+                            <span class="sport-media-count">
+                                <i class="fas fa-camera"></i>
+                                {{ sport.photos.all|length }} Photos
+                            </span>
+
+                        </div>
+
+
+                        <div class="sport-photo-grid">
+
+                            {% for photo in sport.photos.all %}
+
+                                {% if photo.is_active %}
+
+                                <div class="sport-photo-card">
+
+                                    <img
+                                        src="{{ photo.image.url }}"
+                                        alt="{{ photo.title|default:sport.name }}"
+                                    >
+
+                                    <div class="sport-photo-overlay">
+
+                                        <button
+                                            type="button"
+                                            class="sport-photo-view"
+                                            onclick="openSportImage('{{ photo.image.url }}', '{{ photo.title|default:sport.name|escapejs }}')"
+                                        >
+                                            <i class="fas fa-expand"></i>
+                                        </button>
+
+                                    </div>
+
+                                    {% if photo.title %}
+
+                                    <div class="sport-photo-title">
+                                        {{ photo.title }}
+                                    </div>
+
+                                    {% endif %}
+
+                                </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         SPORT VIDEOS
+                    ================================================== -->
+
+                    {% if sport.videos.all %}
+
+                    <div class="sport-media-section sport-video-section">
+
+                        <div class="sport-media-heading">
+
+                            <div>
+
+                                <span>
+                                    <i class="fas fa-video"></i>
+                                    Videos
+                                </span>
+
+                                <h4>
+                                    {{ sport.name }} Videos
+                                </h4>
+
+                            </div>
+
+                            <span class="sport-media-count">
+                                <i class="fas fa-film"></i>
+                                {{ sport.videos.all|length }} Videos
+                            </span>
+
+                        </div>
+
+
+                        <div class="sport-video-grid">
+
+                            {% for video in sport.videos.all %}
+
+                                {% if video.is_active %}
+
+                                <div class="sport-video-card">
+
+                                    <video
+                                        controls
+                                        preload="metadata"
+                                        playsinline
+                                    >
+
+                                        <source
+                                            src="{{ video.video.url }}"
+                                            type="video/mp4"
+                                        >
+
+                                        Your browser does not support
+                                        the video element.
+
+                                    </video>
+
+
+                                    {% if video.title or video.description %}
+
+                                    <div class="sport-video-info">
+
+                                        {% if video.title %}
+
+                                        <h5>
+                                            {{ video.title }}
+                                        </h5>
+
+                                        {% endif %}
+
+                                        {% if video.description %}
+
+                                        <p>
+                                            {{ video.description }}
+                                        </p>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                    {% endif %}
+
+                                </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- EMPTY MEDIA -->
+
+                    {% if not sport.photos.all and not sport.videos.all %}
+
+                    <div class="sport-empty-media">
+
+                        <i class="fas fa-images"></i>
+
+                        <h4>
+                            Media Coming Soon
+                        </h4>
+
+                        <p>
+                            Photos and videos for {{ sport.name }}
+                            will be added soon.
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- NO SPORTS -->
+
+            <div class="sports-empty">
+
+                <div class="sports-empty-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+
+                <h3>
+                    Sports Information Coming Soon
+                </h3>
+
+                <p>
+                    Our school sports activities will be displayed here.
+                </p>
+
+                <a href="{% url 'home' %}" class="sports-empty-btn">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPORTS BENEFITS
+========================================================= -->
+
+<section class="sports-benefits-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                <i class="fas fa-medal"></i>
+                Why Sports Matter
+            </span>
+
+            <h2>
+                Building Stronger Students
+            </h2>
+
+            <p>
+                Sports help students grow physically, mentally and socially.
+            </p>
+
+        </div>
+
+
+        <div class="sports-benefits-grid">
+
+            <div class="sports-benefit-card">
+
+                <div class="sports-benefit-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+
+                <h3>
+                    Teamwork
+                </h3>
+
+                <p>
+                    Students learn cooperation, communication and teamwork.
+                </p>
+
+            </div>
+
+
+            <div class="sports-benefit-card">
+
+                <div class="sports-benefit-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+
+                <h3>
+                    Fitness
+                </h3>
+
+                <p>
+                    Regular physical activities encourage a healthy lifestyle.
+                </p>
+
+            </div>
+
+
+            <div class="sports-benefit-card">
+
+                <div class="sports-benefit-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+
+                <h3>
+                    Discipline
+                </h3>
+
+                <p>
+                    Sports develop discipline, focus and determination.
+                </p>
+
+            </div>
+
+
+            <div class="sports-benefit-card">
+
+                <div class="sports-benefit-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+
+                <h3>
+                    Confidence
+                </h3>
+
+                <p>
+                    Students gain confidence by participating and competing.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="sports-cta-section">
+
+    <div class="container">
+
+        <div class="sports-cta">
+
+            <div>
+
+                <span>
+                    <i class="fas fa-school"></i>
+                    SCHOOL ACTIVITIES
+                </span>
+
+                <h2>
+                    Learn, Play & Grow Together
+                </h2>
+
+                <p>
+                    Explore our facilities and discover more about our school.
+                </p>
+
+            </div>
+
+
+            <div class="sports-cta-buttons">
+
+                <a href="{% url 'facilities' %}" class="sports-cta-btn primary">
+                    <i class="fas fa-building"></i>
+                    View Facilities
+                </a>
+
+                <a href="{% url 'gallery' %}" class="sports-cta-btn secondary">
+                    <i class="fas fa-images"></i>
+                    View Gallery
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPORT IMAGE LIGHTBOX
+========================================================= -->
+
+<div
+    id="sportImageModal"
+    class="sport-image-modal"
+    onclick="closeSportImage(event)"
+>
+
+    <button
+        type="button"
+        class="sport-modal-close"
+        onclick="closeSportImage()"
+        aria-label="Close image"
+    >
+        <i class="fas fa-times"></i>
+    </button>
+
+    <img
+        id="sportModalImage"
+        src=""
+        alt=""
+    >
+
+    <div
+        id="sportModalTitle"
+        class="sport-modal-title"
+    ></div>
+
+</div>
+
+
+<script>
+
+function openSportImage(imageUrl, title) {
+
+    const modal = document.getElementById("sportImageModal");
+    const image = document.getElementById("sportModalImage");
+    const titleBox = document.getElementById("sportModalTitle");
+
+    if (!modal || !image) {
+        return;
+    }
+
+    image.src = imageUrl;
+    image.alt = title || "Sports Image";
+
+    if (titleBox) {
+        titleBox.textContent = title || "";
+    }
+
+    modal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+function closeSportImage(event) {
+
+    if (
+        event &&
+        event.target &&
+        event.target.id !== "sportImageModal"
+    ) {
+        return;
+    }
+
+    const modal = document.getElementById("sportImageModal");
+
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.remove("active");
+
+    document.body.style.overflow = "";
+}
+
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeSportImage();
+    }
+
+});
+
+</script>
+
+{% endblock %}

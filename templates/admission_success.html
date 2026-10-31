@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admission Submitted | {{ school.school_name|default:"School" }}
+{% endblock %}
+
+{% block content %}
+
+<section class="admission-success-section">
+
+    <div class="admission-success-card">
+
+        <div class="admission-success-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <span class="admission-success-label">
+            <i class="fa-solid fa-check"></i>
+            Application Submitted
+        </span>
+
+        <h1>Admission Application Submitted Successfully</h1>
+
+        <p>
+            Thank you for applying to
+            <strong>
+                {{ school.school_name|default:"our school" }}
+            </strong>.
+        </p>
+
+        <p>
+            Your admission application has been received successfully.
+            Our school team will review your application and contact you
+            on the provided mobile number.
+        </p>
+
+        <div class="admission-success-note">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <div>
+                <strong>What happens next?</strong>
+
+                <p>
+                    Our admission team will contact you shortly
+                    regarding the next steps.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="admission-success-actions">
+
+            <a href="{% url 'home' %}" class="success-home-btn">
+                <i class="fa-solid fa-house"></i>
+                Back to Home
+            </a>
+
+            <a href="{% url 'admission' %}" class="success-again-btn">
+                <i class="fa-solid fa-file-pen"></i>
+                Apply Again
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
